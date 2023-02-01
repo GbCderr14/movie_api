@@ -1,0 +1,85 @@
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
+
+#container {
+  margin: 1rem;
+}
+
+.items {
+  margin-bottom: 1rem;
+}
+section {
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 60rem;
+  text-align: center;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: #e82806;
+  border: 1px solid #e6642c;
+  color: rgb(248, 246, 246);
+  font-weight:bold;
+  padding: 0.75rem 2rem;
+  border-radius: 20px;
+  font-size: 1.15rem;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover,
+button:active {
+  background-color: #460897;
+  border-color: #460897;
+}
+.pagination{
+  width:250px;
+  margin: auto;
+  margin-top: 2.5rem;
+}
+.pagination > li {
+  display: inline-block;
+  padding-left: 0;
+}
+.pagination > li {
+  list-style: none;
+  margin: 0..06em;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  text-decoration: none;
+  /* color: #2c689c; */
+  background-color: #fff;
+  /* border: 1px solid #ddd; */
+  margin-left: -1px;
+}
+
+.pagination>li.active>a {
+  color: #fff;
+  background-color: #e82806;
+  /* border-color: #2c8b42; */
+  /* border-radius:10%; */
+}
+.pagination>li.active:hover>a {
+  color: #fff;
+  background-color: #2f06e8;
+  /* border-color: #2c8b42; */
+  /* border-radius:10%; */
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.pagination > li > a:hover {
+  background-color:  #e82806;
+
+  color: white;
+}
