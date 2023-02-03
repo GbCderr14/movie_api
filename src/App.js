@@ -1,7 +1,10 @@
 import React from "react";
 import ReactPaginate from 'react-paginate';
 import { useState,useEffect,useCallback } from "react";
+import {Routes,Route,Link,Navigate} from "react-router-dom";
 import MoviesList from "./components/MoviesList";
+import Users from "./pages/Users";
+import User from "./pages/user";
 import "./App.css";
 function App() {
   const [movies, setMovies] = useState([]);
@@ -21,7 +24,14 @@ function App() {
           id:key,
           name:data[key].username,
           city:data[key].address.city,
-          state:data[key].address.street
+          state:data[key].address.street,
+          email:data[key].email,
+          phone:data[key].phone,
+          website:data[key].website,
+          company:data[key].company.name,
+          catchPhrase:data[key].company.catchPhrase,
+          suite:data[key].address.suite,
+          zipcode:data[key].address.zipcode
         })
       }
       setMovies(loadedMovies);
@@ -71,7 +81,6 @@ function App() {
           pageCount={pageCount}
           previousLabel="<"
           pageClassName="page-item"
-          // pageLinkClassName="page-link"
           previousClassName="page-item"
           previousLinkClassName="page-link"
           nextClassName="page-item"
@@ -89,6 +98,7 @@ function App() {
   }
   if (movies.length > 0) {
     content = <PaginatedItems itemsPerPage={2} />;
+    console.log(movies);
   }
   if (error) {
     content = <p>{error}</p>;
@@ -98,16 +108,12 @@ function App() {
   }
 
 
-  return (
-    <React.Fragment>
-      <section>
-        <button onClick={fetchMoviesHandler}>Fetch Users Data</button>
-      </section>
-      <section>
-        {content}
-      </section>
-    </React.Fragment>
-  );
+  return <>
+  <Routes>
+    <Route path="/users" element={<Users fetchMoviesHandler={fetchMoviesHandler} content={content}/>}/>
+    <Route path="/users/:uid" element={<User movies={movies}/>}/>
+    <Route path="/" element={<Navigate replace to="/users" />} />
+    </Routes></>
 }
 
 export default App;

@@ -38,6 +38,16 @@ button:active {
   background-color: #460897;
   border-color: #460897;
 }
+.btn:focus {
+  outline: none;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #460897;
+  border-color: #460897;
+  color:white;
+}
 .pagination{
   width:250px;
   margin: auto;
@@ -82,4 +92,20 @@ button:active {
   background-color:  #e82806;
 
   color: white;
+}
+.btn{
+  font: inherit;
+  cursor: pointer;
+  background: #e82806;
+  border: 1px solid #e6642c;
+  color: rgb(248, 246, 246);
+  font-weight:bold;
+  padding: 0.75rem 2rem;
+  border-radius: 20px;
+  font-size: 1.15rem;
+}
+.rowii{
+  text-align: left;
+  padding-top:1.2rem;
+  height:100%;
 }
