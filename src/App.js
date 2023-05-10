@@ -2,77 +2,86 @@ import React from "react";
 import ReactPaginate from 'react-paginate';
 import { useState,useEffect,useCallback } from "react";
 import {Routes,Route,Link,Navigate} from "react-router-dom";
-import MoviesList from "./components/MoviesList";
-import Users from "./pages/Users";
-import User from "./pages/user";
+import MoviesList2 from "./components/movie-list/MoviesList2";
+import Movies from "./pages/Movies";
+import Movie from "./pages/movie";
 import "./App.css";
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [movies2, setMovies2] = useState([]);
+  const [isLoading2, setIsLoading2] = useState(false);
   const [error,setError] = useState(null);
-  const fetchMoviesHandler=useCallback(async function () {
-    setIsLoading(true);
+  const fetchMoviesHandler2=useCallback(async function () {
+    setIsLoading2(true);
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      const response = await fetch("https://api.tvmaze.com/search/shows?q=all");
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
       const data = await response.json();
-      const loadedMovies=[];
+      console.log(data);
+      const loadedMovies2=[];
       for(const key in data){
-        loadedMovies.push({
+        loadedMovies2.push({
           id:key,
-          name:data[key].username,
-          city:data[key].address.city,
-          state:data[key].address.street,
-          email:data[key].email,
-          phone:data[key].phone,
-          website:data[key].website,
-          company:data[key].company.name,
-          catchPhrase:data[key].company.catchPhrase,
-          suite:data[key].address.suite,
-          zipcode:data[key].address.zipcode
+          name : data[key].show.name,
+          url : data[key].show.url,
+          type : data[key].show.type,
+          language : data[key].show.language,
+          genre1: data[key].show.genres[0],
+          status : data[key].show.status,
+          runtime : data[key].show.runtime||"Not known",
+          averageRuntime : data[key].show.averageRuntime||"Not known",
+          premiered : data[key].show.premiered||"Not known",
+          ended : data[key].show.ended||"Not known",
+          officialSite : data[key].show.officialSite||"Not known",
+          time : data[key].show.schedule.time||"Not known",
+          days : data[key].show.schedule.days||"Not known",
+          rating : data[key].show.rating||"Not known",
+          averageRating : data[key].show.rating.average||"Not known",
+          weight : data[key].show.weight,
+          network : data[key].show.network||"Not known",
+          externals : data[key].show.externals||"Not known",
+          image : data[key].show.image||"Not known",
+          summary : data[key].show.summary||"Not known",
+          updated : data[key].show.updated||"Not known",
+          links : data[key].show._links||"Not known"
+
         })
       }
-      setMovies(loadedMovies);
+      setMovies2(loadedMovies2);
     } catch(error) {
       alert("Something went wrong");
       setError(error.message);
     } finally {
-      setIsLoading(false);
+      setIsLoading2(false);
     }
   },[]);
+ 
   useEffect(()=>{
-    fetchMoviesHandler();
-  },[fetchMoviesHandler])
-  let content=<p>"Found no users"</p>;
+    fetchMoviesHandler2();
+  },[fetchMoviesHandler2])
+  let content=<p>"Found no movies"</p>;
   
   function PaginatedItems({ itemsPerPage }) {
-    // We start with an empty list of items.
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    // Here we use item offsets; we could also use page offsets
-    // following the API or data you're working with.
     const [itemOffset, setItemOffset] = useState(0);
     
     useEffect(() => {
-      // Fetch items from another resources.
       const endOffset = itemOffset + itemsPerPage;
       console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-      setCurrentItems(movies.slice(itemOffset, endOffset));
-      setPageCount(Math.ceil(movies.length / itemsPerPage));
+      setCurrentItems(movies2.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(movies2.length / itemsPerPage));
     }, [itemOffset, itemsPerPage]);
     
-    // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-      const newOffset = event.selected * itemsPerPage % movies.length;
+      const newOffset = event.selected * itemsPerPage % movies2.length;
       console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
       setItemOffset(newOffset);
     };
     return (
       <>
-        {/* <Items currentItems={currentItems} /> */}
-        <MoviesList movies={currentItems} />
+        <MoviesList2 movies={currentItems} />
         <ReactPaginate
           nextLabel=">"
           onPageChange={handlePageClick}
@@ -91,29 +100,29 @@ function App() {
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
-          // style={{textAlign:"center"}}
         />
       </>
     );
   }
-  if (movies.length > 0) {
-    content = <PaginatedItems itemsPerPage={2} />;
-    console.log(movies);
+  if (movies2.length > 0) {
+    content = <PaginatedItems itemsPerPage={3} />;
+    console.log(movies2);
   }
   if (error) {
     content = <p>{error}</p>;
   }
-  if (isLoading) {
+  if (isLoading2) {
     content = <p>Loading...</p>;
   }
 
 
   return <>
   <Routes>
-    <Route path="/users" element={<Users fetchMoviesHandler={fetchMoviesHandler} content={content}/>}/>
-    <Route path="/users/:uid" element={<User movies={movies}/>}/>
-    <Route path="/" element={<Navigate replace to="/users" />} />
+    <Route path="/movies" element={<Movies content={content}/>}/>
+    <Route path="/movies/:mid" element={<Movie movies={movies2}/>}/>
+    <Route path="/" element={<Navigate replace to="/movies" />} />
     </Routes></>
 }
 
 export default App;
+

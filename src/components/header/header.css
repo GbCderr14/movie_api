@@ -1,0 +1,12 @@
+.header{
+    margin-bottom:3.25rem;
+    font-size: 25px;
+    border-radius: 10px;
+    border:2px solid rgb(220, 9, 9) ;
+    padding:30px;
+    text-align: center;
+    background-color: #111010;
+    color:white;
+    font-family: cursive;
+    font-weight: bold;
+}

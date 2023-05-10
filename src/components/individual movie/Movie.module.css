@@ -1,0 +1,29 @@
+.movie {
+  margin: 1rem;
+  padding: 1rem;
+  /* background-color: #faf8f6; */
+  background-image: url(https://pickamovieforme.b-cdn.net/wp-content/uploads/2020/06/bg.jpg);
+  /* opacity: 0.7; */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 12px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  z-index:0;
+  position: relative;
+}
+img{
+  z-index: 10;
+  position: relative;
+}
+.movie h5 {
+  text-shadow: #ffffff 20px;
+  font-size: 1.5rem;
+  z-index:10;
+  color: #ffffff;
+}
+
+.movie h3 {
+  color: #0d0c0a;
+  margin: 0;
+  font-size: 1rem;
+}

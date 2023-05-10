@@ -8,8 +8,36 @@ html {
 
 body {
   margin: 0;
-  background-color: #272727;
+  background-color: #a7a7a7;
+  /* background-image: url(https://pickamovieforme.b-cdn.net/wp-content/uploads/2020/06/bg.jpg); */
+  background-size:contain;
 }
 .page-item{
-  background-color: red;
+  background-color: #272727;;
+}
+.vsc-initialized{
+  background-color: #919191;
+}
+.modall {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 50rem;
+  z-index: 10015;
+  height:400px;
+  position: fixed;
+  top: 20vh;
+  left: calc(50% - 25rem);
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 1033;
+  background-color: rgba(0, 0, 0,0.75);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
 }
